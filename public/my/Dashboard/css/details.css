@@ -1,0 +1,524 @@
+/* ---------- Reset ---------- */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: #0b1f3a;
+  min-height: 100vh;
+  padding: 40px;
+}
+
+/* ---------- Container ---------- */
+
+.details-container {
+  width: 95%;
+  max-width: 1400px;
+  margin: auto;
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 35px;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.25);
+}
+
+/* ---------- Back Button ---------- */
+
+#backBtn {
+  background: #f57c00;
+  color: #fff;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#backBtn:hover {
+  background: #e65100;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(245, 124, 0, 0.35);
+}
+
+/* ---------- Page Title ---------- */
+
+#tableTitle {
+  text-align: center;
+  margin: 20px 0 30px;
+  color: #d6dee8;
+  font-size: 34px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-bottom: 50px;
+}
+
+/* ---------- Table ---------- */
+
+#userTable {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* Header */
+
+#userTable thead {
+  background: #184888;
+}
+
+#userTable th {
+  color: #fff;
+  padding: 18px;
+  text-align: left;
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Body */
+
+#userTable td {
+  padding: 16px;
+  color: #222;
+  border-bottom: 1px solid #e8e8e8;
+  font-size: 15px;
+}
+
+/* Zebra Rows */
+
+#userTable tbody tr:nth-child(even) {
+  background: #fff7f0;
+}
+
+#userTable tbody tr:nth-child(odd) {
+  background: #ffffff;
+}
+
+/* Hover */
+
+#userTable tbody tr:hover {
+  background: #ffe0b2;
+  transition: 0.25s;
+}
+
+/* Status */
+
+.status {
+  width: 14px;
+  height: 14px;
+  display: inline-block;
+  border-radius: 50%;
+}
+
+.online {
+  background: #2ecc71;
+  box-shadow: 0 0 8px rgba(46, 204, 113, 0.6);
+}
+
+.offline {
+  background: #e53935;
+  box-shadow: 0 0 8px rgba(229, 57, 53, 0.6);
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 900px) {
+  body {
+    padding: 15px;
+  }
+
+  .details-container {
+    padding: 18px;
+  }
+
+  #userTable {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}
+
+/* Filter icon */
+.filter-icon {
+    font-size: 11px;
+    margin-left: 6px;
+    color: #7e809d;
+    transition: color 0.2s;
+}
+
+#userTable th:hover .filter-icon {
+    color: #0d6efd;
+}
+
+/* Clickable header */
+#userTable th {
+    position: relative;
+    cursor: pointer;
+    user-select: none;
+}
+
+/* Popup */
+.filter-menu {
+    position: absolute;
+    width: 260px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(44, 120, 191, 0.15);
+    padding: 12px;
+    z-index: 1000;
+    animation: popup .18s ease;
+}
+
+/* Popup animation */
+@keyframes popup {
+    from{
+        opacity:0;
+        transform:translateY(-8px) scale(.98);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
+}
+
+/* Hide popup */
+.hidden{
+    display:none;
+}
+
+/* Search box */
+.filter-menu input[type="text"]{
+    width:100%;
+    padding:8px 10px;
+    border:1px solid #d0d7de;
+    border-radius:6px;
+    outline:none;
+    font-size:14px;
+    margin-bottom:10px;
+}
+
+.filter-menu input[type="text"]:focus{
+    border-color:#0d6efd;
+    box-shadow:0 0 0 3px rgba(13,110,253,.15);
+}
+
+/* Values list */
+.filter-values{
+    max-height:220px;
+    overflow-y:auto;
+    margin-bottom:10px;
+    border:1px solid #eee;
+    border-radius:6px;
+}
+
+/* Scrollbar */
+.filter-values::-webkit-scrollbar{
+    width:8px;
+}
+
+.filter-values::-webkit-scrollbar-thumb{
+    background:#ccc;
+    border-radius:10px;
+}
+
+.filter-values::-webkit-scrollbar-thumb:hover{
+    background:#999;
+}
+
+/* Each item */
+.filter-item{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    padding:7px 10px;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.filter-item:hover{
+    background:#f5f8ff;
+}
+
+/* Select all row */
+.filter-values > label:first-child{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    padding:8px 10px;
+    font-weight:600;
+}
+
+/* Divider */
+.filter-menu hr{
+    border:none;
+    border-top:1px solid #eee;
+    margin:10px 0;
+}
+
+/* Buttons */
+.filter-menu button{
+    width:100%;
+    padding:8px;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+    font-size:14px;
+    transition:.2s;
+}
+
+/* Sort buttons */
+#sortAsc,
+#sortDesc{
+    background:#f4f6f8;
+    color:#2039c5;
+    margin-bottom:6px;
+}
+
+#sortAsc:hover,
+#sortDesc:hover{
+    background:#e7eefc;
+}
+
+/* Apply button */
+#applyFilter{
+    background:#0d6efd;
+    color:#fff;
+    margin-top:8px;
+}
+
+#applyFilter:hover{
+    background:#0b5ed7;
+}
+
+/* Clear button */
+#clearFilter{
+    margin-top:6px;
+    background:#f8f9fa;
+    color:#1c52a3;
+}
+
+#clearFilter:hover{
+    background:#e9ecef;
+}
+
+/* Value list */
+.filter-values {
+    max-height: 180px;
+    overflow-y: auto;
+    margin-bottom: 10px;
+}
+
+/* Each checkbox row */
+.filter-values label {
+    display: block;
+    padding: 4px 0;
+    cursor: pointer;
+}
+
+/* Buttons */
+.filter-menu button {
+    width: 100%;
+    padding: 6px;
+    margin-top: 5px;
+    cursor: pointer;
+}
+.record-count {
+    display: inline-block;
+    padding: 6px 12px;
+    margin: 0px;
+    background: #f5f5f5;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    line-height: 1.5;
+}
+.table-toolbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin:12px 0;
+}
+
+.clear-all-btn{
+    padding:8px 14px;
+    border:none;
+    border-radius:6px;
+    background:#dc3545;
+    color:#fff;
+    cursor:pointer;
+    font-size:14px;
+    transition:.2s;
+    line-height: 1.5 ;
+}
+
+.clear-all-btn:hover{
+    background:#bb2d3b;
+}
+.clear-all-btn:disabled{
+    opacity:0.5;
+    cursor:not-allowed;
+}
+
+
+.recordCount
+{
+
+    background-color: #fff !important;
+    padding: 10px !important;
+
+}
+/* =========================================================
+   PAGINATION
+   ========================================================= */
+
+.pagination-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 18px;
+    padding: 12px 0;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+/* Rows per page */
+
+.rows-per-page {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: #201e1e;
+}
+
+.rows-per-page select {
+    padding: 7px 10px 7px 10px;
+    border: 1px solid #cfd4da;
+    border-radius: 6px;
+    background: #fff;
+    font-size: 14px;
+    cursor: pointer;
+    outline: none;
+}
+
+.rows-per-page select:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 2px rgb(235, 239, 245);
+}
+
+/* Pagination buttons */
+
+#pagination {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+#pagination button {
+    min-width: 36px;
+    height: 34px;
+    padding: 5px 10px;
+
+    border: 1px solid #d0d7de;
+    border-radius: 6px;
+
+    background: #fff;
+    color: #333;
+
+    font-size: 14px;
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+}
+
+#pagination button:hover:not(:disabled) {
+    background: #f0f4f8;
+    border-color: #184888;
+}
+
+/* Current page */
+
+#pagination button.active {
+    background: #184888;
+    color: #fff;
+    border-color: #184888;
+    font-weight: 600;
+}
+
+/* Disabled Previous / Next */
+
+#pagination button:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+    background: #f5f5f5;
+}
+
+/* Previous / Next buttons */
+
+#pagination .prev-next {
+    padding-left: 14px;
+    padding-right: 14px;
+}
+
+/* Ellipsis */
+
+#pagination .ellipsis {
+    min-width: 30px;
+    text-align: center;
+    color: #777;
+    user-select: none;
+}
+
+
+/* =========================================================
+   PAGINATION RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+    .pagination-container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .rows-per-page {
+        justify-content: center;
+    }
+
+    #pagination {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    #pagination button {
+        min-width: 34px;
+        height: 32px;
+    }
+}
+.pagination-ellipsis {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 30px;
+    height: 34px;
+
+    color: #fff3f3;
+    font-size: 14px;
+}
+.table-box {
+    background: #dccfc2;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    margin: 20px 0;
+    overflow-x: auto;
+}

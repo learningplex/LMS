@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard Guideplex</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet"
+href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+
+    <header>
+
+        <div class="logo-background">
+
+            
+
+            <img src="assets/logo.png" alt="University Logo" class="logo">
+
+          
+
+        </div>
+
+        <div class="live-status">
+
+            <span class="live-dot"></span>
+
+            <h3>LIVE</h3>
+
+        </div>
+
+    </header>
+
+    <!-- Cards -->
+
+    <main class="dashboard" id="dashboardPage">
+
+    <div class="card authority" data-group="authority">
+        <div class="icon-circle"><img src="assets/authority.jpeg" alt=""></div>
+        <h2>Senior Management</h2>
+        <h3 id="authority-count">0/5</h3>
+    </div>
+
+    <div class="card deans" data-group="deans">
+        <div class="icon-circle"><img src="assets/dean.jpeg" alt=""></div>
+        <h2>Deans</h2>
+        <h3 id="deans-count">0/4</h3>
+    </div>
+
+    <div class="card hods" data-group="hods">
+        <div class="icon-circle"><img src="assets/hod.jpeg" alt=""></div>
+        <h2>HODs & Associate Deans</h2>
+        <h3 id="hods-count">0/12</h3>
+    </div>
+
+    <div class="card pcs" data-group="pcs">
+        <div class="icon-circle"><img src="assets/pc.jpeg" alt=""></div>
+        <h2>Program Coordinators</h2>
+        <h3 id="pcs-count">0/17</h3>
+    </div>
+
+    <div class="card faculty" data-group="faculty" >
+        <div class="icon-circle"><img src="assets/faculty.jpeg" alt=""></div>
+        <h2>Teaching Staff</h2>
+        <h3 id="faculty-count">0/102</h3>
+    </div>
+
+    <div class="card visiting" data-group="visiting">
+        <div class="icon-circle"><img src="assets/visiting.jpeg" alt=""></div>
+        <h2>Visiting / Adjunct Faculty</h2>
+        <h3 id="visiting-count">0/82</h3>
+    </div>
+
+    <div class="card lab" data-group="lab">
+        <div class="icon-circle"><img src="assets/lab.jpeg" alt=""></div>
+        <h2>Lab Assistant / Instructor / Technician</h2>
+        <h3 id="lab-count">0/26</h3>
+    </div>
+
+    <div class="card nonteaching" data-group="staff">
+        <div class="icon-circle"><img src="assets/staff.jpeg" alt=""></div>
+        <h2>Non-Teaching Staff</h2>
+        <h3 id="staff-count">0/69</h3>
+    </div>
+
+    <div class="card students" data-group="students">
+        <div class="icon-circle"><img src="assets/student.jpeg" alt=""></div>
+        <h2>Students</h2>
+        <h3 id="students-count">0/3385</h3>
+    </div>
+
+</main>
+
+    <script src="js/app.js"></script>
+
+</body>
+
+</html>

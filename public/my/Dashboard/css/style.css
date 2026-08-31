@@ -1,0 +1,346 @@
+/* ===========================
+   GOOGLE FONT
+=========================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: "Poppins", sans-serif;
+  color: #fff;
+  max-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+
+  background: url("../assets/background.png") center center / cover no-repeat;
+
+  opacity: 0.65; /* Change this value */
+
+  z-index: -2;
+}
+
+/* ===========================
+   BACKGROUND GLOW
+=========================== */
+
+.background-glow {
+  position: fixed;
+  width: 700px;
+  height: 700px;
+  background: #2563eb25;
+  border-radius: 50%;
+  filter: blur(140px);
+  top: -250px;
+  right: -250px;
+  z-index: -1;
+}
+
+/* ===========================
+   HEADER
+=========================== */
+
+header {
+  position: relative;
+  display: flex;
+  justify-content: flex-end; /* Keeps LIVE on the right */
+  padding: 25px 40px;
+  height: 180px;
+}
+
+.logo {
+  position: absolute;
+  left: 8%;
+  transform: translatey(5%);
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
+}
+
+/* ===========================
+   LIVE
+=========================== */
+
+.live-status {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 800;
+  color: #950b0b;
+}
+
+.live-dot {
+  width: 15px;
+  height: 15px;
+  background: #950b0b;
+  border-radius: 50%;
+  animation: pulse 1.4s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  50% {
+    transform: scale(1.6);
+    opacity: 0.4;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* ===========================
+   DASHBOARD
+=========================== */
+
+.dashboard {
+  width: 90%;
+  margin: 100px auto;
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 35px;
+}
+
+.card {
+  background: rgba(9, 1, 51, 0.75);
+  backdrop-filter: blur(15px);
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  margin-top: -20px;
+  border-radius: 20px;
+
+  padding: 25px;
+
+  text-align: center;
+
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.35);
+}
+
+.card {
+  animation: floatCard 6s ease-in-out infinite;
+}
+
+@keyframes floatCard {
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-6px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}
+.students {
+  animation-delay: 0s;
+}
+
+.deans {
+  animation-delay: 1s;
+}
+
+.faculty {
+  animation-delay: 2s;
+}
+
+.icon-circle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.icon-circle img {
+  width: 52px;
+  height: 52px;
+  object-fit: contain;
+}
+
+.deans .icon-circle {
+  background: #8b5cf6;
+}
+
+.faculty .icon-circle {
+  background: #10b981;
+}
+
+.students .icon-circle {
+  background: #3b82f6;
+}
+
+/* Colors */
+
+.students i {
+  color: #3b82f6;
+}
+
+.deans i {
+  color: #8b5cf6;
+}
+
+.faculty i {
+  color: #10b981;
+}
+
+.card h2 {
+  font-size: 1.2rem;
+
+  margin-bottom: 20px;
+}
+
+.card h3 {
+  font-size: 3.5rem;
+
+  font-weight: 800;
+
+  letter-spacing: 2px;
+}
+
+.card p {
+  color: #bfc9d4;
+
+  letter-spacing: 1px;
+}
+
+/* ===========================
+   TOTAL
+=========================== */
+
+.total-section {
+  width: 90%;
+
+  margin: auto;
+
+  text-align: center;
+
+  padding: 45px;
+
+  background: rgba(255, 255, 255, 0.05);
+
+  border-radius: 22px;
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.total-section h2 {
+  color: #bfc9d4;
+
+  margin-bottom: 15px;
+}
+
+.total-section h1 {
+  font-size: 5rem;
+
+  color: #22c55e;
+}
+
+/* ===========================
+   FOOTER
+=========================== */
+
+footer {
+  text-align: center;
+
+  padding: 35px;
+
+  color: #bfc9d4;
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+
+@media (max-width: 992px) {
+  .dashboard {
+    grid-template-columns: 1fr;
+  }
+
+  header {
+    flex-direction: column;
+
+    gap: 25px;
+
+    text-align: center;
+  }
+
+  .logo-section {
+    flex-direction: column;
+  }
+}
+
+.quote-footer {
+  width: 100%;
+  margin-top: -60px;
+  justify-content: center;
+  padding-bottom: 30px;
+}
+
+.quote {
+  color: #000000;
+  font-size: 2rem;
+  font-weight: 350;
+  line-height: 1.6;
+  letter-spacing: 1px;
+}
+
+.quote strong {
+  font-weight: 700;
+}
+
+.author {
+  margin-top: 20px;
+  text-align: right;
+  font-size: 2rem;
+  font-weight: 600;
+  color: #222;
+}
+.authority .icon-circle {
+  background: #dc2626;
+}
+.deans .icon-circle {
+  background: #8b5cf6;
+}
+.hods .icon-circle {
+  background: #f59e0b;
+}
+.pcs .icon-circle {
+  background: #0ea5e9;
+}
+.faculty .icon-circle {
+  background: #10b981;
+}
+.visiting .icon-circle {
+  background: #14b8a6;
+}
+.lab .icon-circle {
+  background: #ef4444;
+}
+.nonteaching .icon-circle {
+  background: #6366f1;
+}
+.students .icon-circle {
+  background: #3b82f6;
+}
+
+.card {
+  cursor: pointer;
+}
