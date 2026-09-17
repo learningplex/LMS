@@ -9,61 +9,135 @@ header('Content-Type: application/json');
 
 global $DB;
 
+$now = time();
+
+/*
+ * Default result.
+ */
 $result = [
     'authority' => 0,
-    'deans'     => 0,
-    'hods'      => 0,
-    'pcs'       => 0,
-    'faculty'   => 0,
-    'visiting'  => 0,
-    'lab'       => 0,
-    'staff'     => 0,
-    'students'  => 0
+    'deans' => 0,
+    'hods' => 0,
+    'pcs' => 0,
+    'faculty' => 0,
+    'visiting' => 0,
+    'lab' => 0,
+    'staff' => 0,
+    'students' => 0
 ];
 
-$records = $DB->get_records('local_launchcounter_counts');
+/*
+ * Get users from local_onlinestatus.
+ *
+ * IMPORTANT:
+ *
+ * We do NOT use user.lastaccess here.
+ *
+ * local_onlinestatus.status is the single source
+ * of truth.
+ *
+ * If status = 1:
+ *     User is online.
+ *
+ * If status = 1 and offlineat is still in the future:
+ *     User is in the 5-minute logout grace period.
+ *
+ * If offlineat has expired:
+ *     Mark the user offline.
+ */
+$sql = "SELECT u.id,
+               os.status,
+               os.offlineat
+          FROM {user} u
+          JOIN {local_onlinestatus} os
+            ON os.userid = u.id
+         WHERE u.id > 1
+           AND u.deleted = 0
+           AND os.status = 1
+           AND (
+                os.offlineat = 0
+                OR os.offlineat > :now
+           )";
 
-foreach ($records as $record) {
+$users = $DB->get_records_sql(
+    $sql,
+    [
+        'now' => $now
+    ]
+);
 
-    switch ($record->role) {
+$context = \context_system::instance();
 
-        case 'authority':
-            $result['authority'] = (int)$record->count;
-            break;
+foreach ($users as $user) {
 
-        case 'deans':
-            $result['deans'] = (int)$record->count;
-            break;
+    /*
+     * Get the user's system-level roles.
+     */
+    $roles = get_user_roles(
+        $context,
+        $user->id
+    );
 
-        case 'hods':
-            $result['hods'] = (int)$record->count;
-            break;
+    $dashboardrole = null;
 
-        case 'pcs':
-            $result['pcs'] = (int)$record->count;
-            break;
+    foreach ($roles as $role) {
 
-        case 'faculty':
-            $result['faculty'] = (int)$record->count;
-            break;
+        switch ($role->shortname) {
 
-        case 'visiting':
-            $result['visiting'] = (int)$record->count;
-            break;
+            case 'authority':
+                $dashboardrole = 'authority';
+                break 2;
 
-        case 'lab':
-            $result['lab'] = (int)$record->count;
-            break;
+            case 'deans':
+                $dashboardrole = 'deans';
+                break 2;
 
-        case 'staff':
-            $result['staff'] = (int)$record->count;
-            break;
+            case 'hods':
+                $dashboardrole = 'hods';
+                break 2;
 
-        case 'students':
-            $result['students'] = (int)$record->count;
-            break;
+            case 'pcs':
+                $dashboardrole = 'pcs';
+                break 2;
+
+            case 'faculty':
+                $dashboardrole = 'faculty';
+                break 2;
+
+            case 'visiting':
+                $dashboardrole = 'visiting';
+                break 2;
+
+            case 'lab':
+                $dashboardrole = 'lab';
+                break 2;
+
+            case 'staff':
+                $dashboardrole = 'staff';
+                break 2;
+
+            case 'students':
+                $dashboardrole = 'students';
+                break 2;
+        }
     }
+
+    /*
+     * Ignore users without a tracked dashboard role.
+     */
+    if (!$dashboardrole) {
+        continue;
+    }
+
+    /*
+     * Count online user.
+     */
+    $result[$dashboardrole]++;
 }
 
+/*
+ * Return JSON response.
+ */
 echo json_encode($result);
+
 exit;

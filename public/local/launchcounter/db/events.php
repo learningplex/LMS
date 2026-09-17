@@ -2,11 +2,11 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$observers = [
+/*
+ * No login/logout observers are required here.
+ *
+ * local_onlinestatus is the single source of truth
+ * for online/offline status.
+ */
 
-    [
-        'eventname' => '\core\event\user_loggedin',
-        'callback'  => '\local_launchcounter\observer::user_loggedin',
-    ],
-
-];
+$observers = [];

@@ -43,7 +43,7 @@ function animateValue(id, start, end, duration = 1000) {
 async function loadDashboard() {
   try {
     const response = await fetch(
-      "https://guideplexlms.gsfcuniversity.in:8083/local/launchcounter/api.php?" +
+      "https://learningplex.gsfcuniversity.in/local/launchcounter/api.php?" +
         Date.now(),
     );
 

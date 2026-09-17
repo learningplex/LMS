@@ -19170,8 +19170,6 @@ const tableData1 = {
       status: false,
       lastAccess: "-",
     },
-                         
-      name: "Parth Pamnani",
     {
       email: "25BBA04049@gsfcuniversity.ac.in",
       name: "Pranjal Patel",
@@ -30480,7 +30478,7 @@ const tableTitles = {
 async function loadOnlineStatus() {
   try {
     const response = await fetch(
-      "https://guideplexlms.gsfcuniversity.in:8083/local/onlinestatus/api.php",
+      "https://learningplex.gsfcuniversity.in/local/onlinestatus/api.php",
       {
         credentials: "include",
       }
@@ -30497,9 +30495,9 @@ async function loadOnlineStatus() {
       );
 
       if (person) {
-        person.status = true;
-        person.lastAccess = user.lastAccess;
-      }
+  person.status = Number(user.status) === 1;
+  person.lastAccess = user.lastAccess;
+}
     });
 
     renderTable();

@@ -1,4 +1,5 @@
 <?php
+
 namespace local_onlinestatus;
 
 defined('MOODLE_INTERNAL') || die();
@@ -6,7 +7,9 @@ defined('MOODLE_INTERNAL') || die();
 class observer {
 
     /**
-     * Runs whenever a user logs in.
+     * Runs when a user logs in.
+     *
+     * Login means the user is online.
      *
      * @param \core\event\user_loggedin $event
      */
@@ -14,27 +17,44 @@ class observer {
 
         global $DB;
 
-        // Logged in user's ID.
         $userid = $event->userid;
 
-        // Get the Moodle user record.
-        $user = $DB->get_record('user', ['id' => $userid]);
-
-        // Stop if no user or no email.
-        if (!$user || empty($user->email)) {
+        // Ignore guest user.
+        if ($userid <= 1) {
             return;
         }
 
-        // Check if this email already exists.
-        $record = $DB->get_record(
-            'local_onlinestatus',
-            ['email' => $user->email]
+        $user = $DB->get_record(
+            'user',
+            ['id' => $userid],
+            'id,email,deleted'
         );
 
-        // Existing user -> update last login time.
+        if (!$user || $user->deleted || empty($user->email)) {
+            return;
+        }
+
+        $now = time();
+
+        $record = $DB->get_record(
+            'local_onlinestatus',
+            ['userid' => $userid]
+        );
+
         if ($record) {
 
-            $record->lastaccess = time();
+            /*
+             * User has logged in.
+             *
+             * Keep them online until an explicit logout.
+             */
+            $record->status = 1;
+            $record->lastaccess = $now;
+
+            /*
+             * Clear any previous logout grace period.
+             */
+            $record->offlineat = 0;
 
             $DB->update_record(
                 'local_onlinestatus',
@@ -43,17 +63,67 @@ class observer {
 
         } else {
 
-            // First login -> insert new record.
-            $newrecord = new \stdClass();
+            /*
+             * First login.
+             */
+            $record = new \stdClass();
 
-            $newrecord->email = $user->email;
-            $newrecord->firstlogin = time();
-            $newrecord->lastaccess = time();
+            $record->userid = $userid;
+            $record->email = $user->email;
+            $record->firstlogin = $now;
+            $record->lastaccess = $now;
+            $record->status = 1;
+            $record->offlineat = 0;
 
             $DB->insert_record(
                 'local_onlinestatus',
-                $newrecord
+                $record
             );
         }
     }
+
+    /**
+     * Runs when a user logs out.
+     *
+     * Keep the user online for exactly 5 minutes after logout.
+     *
+     * @param \core\event\user_loggedout $event
+     */
+    public static function user_loggedout(\core\event\user_loggedout $event) {
+
+        global $DB;
+
+        $userid = $event->userid;
+
+        // Ignore guest user.
+        if ($userid <= 1) {
+            return;
+        }
+
+        $record = $DB->get_record(
+            'local_onlinestatus',
+            ['userid' => $userid]
+        );
+
+        if (!$record) {
+            return;
+        }
+
+        $now = time();
+
+        /*
+         * User has logged out.
+         *
+         * Keep status = 1 for another 5 minutes.
+         */
+        $record->status = 1;
+        $record->lastaccess = $now;
+        $record->offlineat = $now + (5 * 60);
+
+        $DB->update_record(
+            'local_onlinestatus',
+            $record
+        );
+    }
 }
+

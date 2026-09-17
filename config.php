@@ -20,24 +20,36 @@ $CFG->dboptions = array (
 );
 
 // Moodle Public URL Configuration
-$CFG->sslproxy = false;
-$CFG->wwwroot  = 'https://guideplexlms.gsfcuniversity.in:8083';
-//$CFG->wwwroot  = 'http://10.205.19.6.in:8083';
+$CFG->sslproxy = true;
+$CFG->everyproxy = true;
+$CFG->wwwroot = 'https://learningplex.gsfcuniversity.in';
+//$CFG->wwwroot = 'https://learningplex.gsfcuniversity.in:8083';
+//$CFG->wwwroot = 'https://learningplex.gsfcuniversity.in:8083';
 
 $CFG->dataroot  = '/var/www/html/GuidePLex/.httmvdu57sq3gf.data';
 $CFG->admin     = 'admin';
-$CFG->noemailever = true;
+//$CFG->noemailever = true;
 $CFG->directorypermissions = 00777;
 $CFG->dbsessions = false;
 
+
+$CFG->session_handler_class = '\core\session\redis';
+$CFG->session_redis_host = '127.0.0.1';
+$CFG->session_redis_port = 6379;
+$CFG->session_redis_database = 0;
+$CFG->session_redis_prefix = 'guideplex_sess_';
+$CFG->session_redis_acquire_lock_timeout = 120;
+$CFG->session_redis_lock_expire = 7200;
+
+
 require_once(__DIR__ . '/lib/setup.php');
+
+
 
 // There is no php closing tag in this file,
 // it is intentional because it prevents trailing whitespace problems!
 // Temporary Developer Debugging for Performance Generator
 //@error_reporting(E_ALL | E_STRICT);
 //@ini_set('display_errors', '1');
-//$CFG->debug = (E_ALL | E_STRICT);
-//$CFG->debugdisplay = 1;
-
-require_once(__DIR__ . '/lib/setup.php');
+$CFG->debug = (E_ALL | E_STRICT);
+$CFG->debugdisplay = 1;

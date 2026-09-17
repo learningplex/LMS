@@ -7,47 +7,76 @@
 
     <TABLES>
 
-        <TABLE NAME="local_launchcounter_counts" COMMENT="Stores role counts">
+        <TABLE NAME="local_launchcounter_counts"
+               COMMENT="Stores role counts">
 
             <FIELDS>
 
-                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+                <FIELD NAME="id"
+                       TYPE="int"
+                       LENGTH="10"
+                       NOTNULL="true"
+                       SEQUENCE="true"/>
 
-                <FIELD NAME="role" TYPE="char" LENGTH="50" NOTNULL="true"/>
+                <FIELD NAME="role"
+                       TYPE="char"
+                       LENGTH="50"
+                       NOTNULL="true"/>
 
-                <FIELD NAME="count" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="count"
+                       TYPE="int"
+                       LENGTH="10"
+                       NOTNULL="true"
+                       DEFAULT="0"/>
 
             </FIELDS>
 
             <KEYS>
 
-                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+                <KEY NAME="primary"
+                     TYPE="primary"
+                     FIELDS="id"/>
 
             </KEYS>
 
         </TABLE>
 
-        <TABLE NAME="local_launchcounter_users" COMMENT="Users already counted">
+        <TABLE NAME="local_launchcounter_users"
+               COMMENT="Legacy user tracking table">
 
             <FIELDS>
 
-                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+                <FIELD NAME="id"
+                       TYPE="int"
+                       LENGTH="10"
+                       NOTNULL="true"
+                       SEQUENCE="true"/>
 
-                <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true"/>
+                <FIELD NAME="userid"
+                       TYPE="int"
+                       LENGTH="10"
+                       NOTNULL="true"/>
 
-                <FIELD NAME="timecounted" TYPE="int" LENGTH="10" NOTNULL="true"/>
+                <FIELD NAME="timecounted"
+                       TYPE="int"
+                       LENGTH="10"
+                       NOTNULL="true"/>
 
             </FIELDS>
 
             <KEYS>
 
-                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+                <KEY NAME="primary"
+                     TYPE="primary"
+                     FIELDS="id"/>
 
             </KEYS>
 
             <INDEXES>
 
-                <INDEX NAME="userid" UNIQUE="true" FIELDS="userid"/>
+                <INDEX NAME="userid"
+                       UNIQUE="true"
+                       FIELDS="userid"/>
 
             </INDEXES>
 

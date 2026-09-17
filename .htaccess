@@ -1,6 +1,9 @@
 RewriteEngine On
 RewriteBase //
 
+# Clean Moodle course URLs
+#RewriteRule ^course/([^/?]+)/?$ /public/local/cleanurl/course.php?slug=$1 [QSA,END]
+
 SetEnvIf Request_URI "deleteme\.\w+\.php" noabort noconntimeout
 RewriteCond %{REQUEST_FILENAME} deleteme\.\w+\.php
 RewriteRule (.*) - [L]
