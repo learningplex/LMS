@@ -1,0 +1,20 @@
+name: Moodle CI
+
+on:
+  push:
+    branches:
+      - backup
+  pull_request:
+    branches:
+      - backup
+
+jobs:
+  success:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: CI Success
+        run: echo "CI workflow completed successfully."
