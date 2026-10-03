@@ -194,8 +194,6 @@ class clean_url {
      * Examples:
      * - /course/view.php?id={ID} → /course/{shortname}
      * - /course/edit.php?id={ID} → /course/edit/{shortname}
-     * - /course/index.php → /course
-     * - /course/index.php?categoryid={ID} → /course/category/{ID}/{categoryname}
      *
      * @return bool False if no match, true if rewritten.
      */
@@ -211,7 +209,6 @@ class clean_url {
         $coursepath = [
             '/course/view.php',
             '/course/edit.php',
-            '/course/index.php',
         ];
         if (!in_array($this->path, $coursepath)) {
             return;
