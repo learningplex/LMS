@@ -34,38 +34,13 @@
         }
     }
 }}
-
-<div id="page-content" class="min-vh-100 row g-0">
-    {{#showleftpanel}}
-    <aside class="login-layout-right col-lg-12 d-lg-flex">
-        <!--{{> theme_academi/core/login_panel }}-->
-          <div id="region-main-box" class="login-layout-right-content" style="background-color: #ccc;padding: 25px;">
-            <div class="login-container">
-                {{{ output.main_content }}}
-            </div>
-        </div>
-       
-    </aside>
-    {{/showleftpanel}}
-    <!-- -->
-    <!--<div id="region-main" class="login-layout-right {{#showleftpanel}}col-12 col-lg-6{{/showleftpanel}}{{^showleftpanel}}col-12{{/showleftpanel}}">
-        <div id="region-main-box" class="login-layout-right-content">
-            <div class="login-container">
-                {{{ output.main_content }}}
-            </div>
-        </div>
-    </div>-->
-</div>
-
-
-<!--
 <div id="page-content" class="min-vh-100 row g-0">
     {{#showleftpanel}}
     <aside class="login-layout-left col-lg-6 d-none d-lg-flex">
         {{> theme_academi/core/login_panel }}
     </aside>
     {{/showleftpanel}}
-    <div id="region-main" class="login-layout-right {{#showleftpanel}}col-12 col-lg-6{{/showleftpanel}}{{^showleftpanel}}col-12{{/showleftpanel}}">
+    <div  class="login-layout-right {{#showleftpanel}}col-12 col-lg-6{{/showleftpanel}}{{^showleftpanel}}col-12{{/showleftpanel}}">
         <div id="region-main-box" class="login-layout-right-content">
             <div class="login-container">
                 {{{ output.main_content }}}
@@ -73,4 +48,4 @@
         </div>
     </div>
 </div>
--->
+

@@ -30,23 +30,56 @@
 {{^leftinstructions}}
     {{#showdefaultloginpanel}}
         <div class="login-layout-left-content">
-            <h1 class="h2 mb-3">{{#str}}loginwelcometitle{{/str}}</h1>
-            <div class="mx-auto mb-4 text-start">
-                {{#str}}loginwelcomedescription{{/str}}
-            </div>
-            <p class="mx-auto mb-4">{{#str}}loginpaneltagline{{/str}}</p>
+            <h1 style="font-size: 33px;" class="mb-3"><strong>Welcome to LearningPlex</strong></h1>
+
+            <div style="text-align: center;">
+                GSFC University's Learning Management System
+            </div> 
+            <p class="mx-auto mb-4">
+                Learn. Engage. Excel.
+            </p>
+
             <div class="login-layout-stats">
-                <div class="login-layout-stat">
-                    <strong class="login-layout-stat-value">{{#str}}loginstatusers_value{{/str}}</strong>
-                    <span>{{#str}}loginstatusers{{/str}}</span>
+                <div style="display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1.5rem;">
+                    <strong class="login-layout-stat-value">
+                        {{learningplex_registeredusers}}
+                    </strong>
+                    <span>Users</span>
                 </div>
-                <div class="login-layout-stat">
-                    <strong class="login-layout-stat-value">{{#str}}loginstatsites_value{{/str}}</strong>
-                    <span>{{#str}}loginstatsites{{/str}}</span>
+
+               
+
+                <div style="display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1.5rem;">
+                    <strong class="login-layout-stat-value">
+                        {{learningplex_teachers}}
+                    </strong>
+                    <span>Faculty</span>
                 </div>
-                <div class="login-layout-stat">
-                    <strong class="login-layout-stat-value">{{#str}}loginstatcountries_value{{/str}}</strong>
-                    <span>{{#str}}loginstatcountries{{/str}}</span>
+                
+                <div style="display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1.5rem;">
+                <strong class="login-layout-stat-value">
+                    {{learningplex_totalstudents}}
+                </strong>
+                <span>Students</span>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1.5rem;">
+                <strong class="login-layout-stat-value">
+                    {{learningplex_visitingfaculty}}
+                </strong>
+                <span>Visiting Faculty</span>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1.5rem;">
+                    <strong class="login-layout-stat-value">
+                        {{learningplex_totalcourses}}
+                    </strong>
+                    <span>Total Courses</span>
+                </div>
+             <div style="display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1.5rem;">
+                    <strong class="login-layout-stat-value">
+                        {{learningplex_visiblecourses}}
+                    </strong>
+                    <span>Active Courses</span>
                 </div>
             </div>
         </div>
@@ -59,3 +92,4 @@
         </div>
     </div>
 {{/leftinstructions}}
+
