@@ -18,7 +18,7 @@
  * Columns 2 Layout
  * @package    theme_academi
  * @copyright  2015 onwards LMSACE Dev Team (http://www.lmsace.com)
- * @author    LMSACE Dev Team
+ * @author     LMSACE Dev Team
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -82,6 +82,67 @@ if ($PAGE->has_secondary_navigation()) {
     $overflowdata = $PAGE->secondarynav->get_overflow_menu_data();
     if (!is_null($overflowdata)) {
         $overflow = $overflowdata->export_for_template($OUTPUT);
+    }
+}
+
+
+/**
+ * Add role-authorised Custom Pages to the primary navigation.
+ */
+if (class_exists('\local_custompages\manager')
+        && isloggedin()
+        && !isguestuser()) {
+
+    $manager = '\local_custompages\manager';
+
+    // Initialise the primary navigation before inserting custom pages.
+    $PAGE->primarynav->initialise();
+
+    $custompages = $manager::get_pages(true);
+
+    usort($custompages, function($a, $b) {
+        $order = (int)$a->sortorder <=> (int)$b->sortorder;
+        return $order ?: strcasecmp($a->title, $b->title);
+    });
+
+    $providers = $manager::get_providers();
+
+    foreach ($custompages as $custompage) {
+        $provider = $providers[$custompage->provider] ?? null;
+
+        if (!$provider || !class_exists($provider)) {
+            continue;
+        }
+
+        $providerinstance = new $provider();
+
+        if (!$manager::can_user_view_page($custompage, $providerinstance)) {
+            continue;
+        }
+
+        $url = new \moodle_url(
+            '/local/custompages/view.php',
+            ['slug' => $custompage->slug]
+        );
+
+        $key = 'local_custompages_' . $custompage->id;
+
+        $node = \navigation_node::create(
+            format_string($custompage->title),
+            $url,
+            \navigation_node::TYPE_CUSTOM,
+            null,
+            $key
+        );
+
+        // Insert before Admin Area if it exists, otherwise append to the menu.
+        if ($PAGE->primarynav->get('siteadminnode')) {
+            $PAGE->primarynav->add_node($node, 'siteadminnode');
+        } else {
+            $PAGE->primarynav->add_node($node);
+        }
+
+        $node->showinflatnavigation = true;
     }
 }
 

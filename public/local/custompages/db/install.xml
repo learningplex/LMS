@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="local/custompages/db" VERSION="2026102500" COMMENT="Custom Pages tables">
+  <TABLES>
+    <TABLE NAME="local_custompages_pages" COMMENT="Registered custom pages">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="title" TYPE="char" LENGTH="255" NOTNULL="true"/>
+        <FIELD NAME="slug" TYPE="char" LENGTH="100" NOTNULL="true"/>
+        <FIELD NAME="provider" TYPE="char" LENGTH="100" NOTNULL="true"/>
+        <FIELD NAME="providerslug" TYPE="char" LENGTH="100" NOTNULL="true"/>
+        <FIELD NAME="visible" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="1"/>
+        <FIELD NAME="sortorder" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+        <KEY NAME="slug_unique" TYPE="unique" FIELDS="slug"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="provider_ix" UNIQUE="false" FIELDS="provider"/>
+      </INDEXES>
+    </TABLE>
+    <TABLE NAME="local_custompages_roles" COMMENT="Roles allowed to view registered custom pages">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="pageid" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="roleid" TYPE="int" LENGTH="10" NOTNULL="true"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+        <KEY NAME="page_fk" TYPE="foreign" FIELDS="pageid" REFTABLE="local_custompages_pages" REFFIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="page_role_uix" UNIQUE="true" FIELDS="pageid, roleid"/>
+        <INDEX NAME="role_ix" UNIQUE="false" FIELDS="roleid"/>
+      </INDEXES>
+    </TABLE>
+  </TABLES>
+</XMLDB>
